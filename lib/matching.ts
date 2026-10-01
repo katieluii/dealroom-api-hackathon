@@ -4,7 +4,7 @@ const normal=(s:string)=>s.trim().toLowerCase();
 export function fitReason(investor:DealroomInvestor,company:PortfolioCompany,asOf:string):string{
  const now=new Date(asOf);const from=new Date(now);from.setUTCFullYear(from.getUTCFullYear()-3);
  const names=[...new Set(investor.recentInvestments.filter(i=>Date.parse(i.date)>=from.getTime()&&Date.parse(i.date)<=now.getTime()&&i.sectors.some(s=>company.sectors.some(c=>normal(c)===normal(s)))).map(i=>i.companyName))];
- return names.length?`Has backed ${names.length} ${company.sectors[0].toLowerCase()} ${names.length===1?'company':'companies'} since ${from.getUTCFullYear()}: ${names.join(', ')}.`:'Sector match only';
+ return names.length?`Has backed ${names.length} ${names.length===1?'company':'companies'} in matching sectors since ${from.getUTCFullYear()}: ${names.join(', ')}.`:'Sector match only';
 }
 export function routesFor(company:PortfolioCompany,visible:VisibleSnapshot,asOf=new Date().toISOString()):{routes:Route[];unconfirmed:Route[]}{
  if(company.firmId!==visible.viewer.firmId||company.matchStatus==='rejected')return {routes:[],unconfirmed:[]};
@@ -26,4 +26,6 @@ export function companyDetail(company:PortfolioCompany,visible:VisibleSnapshot,a
  return {company:{...company,bestPath,group:bestPath<40?'Could use help':'Well connected',routeCount:routes.length},routes,unconfirmed};
 }
 export function portfolio(visible:VisibleSnapshot,asOf?:string):PortfolioSummary[]{return visible.companies.map(c=>companyDetail(c,visible,asOf).company).sort((a,b)=>b.bestPath-a.bestPath||a.name.localeCompare(b.name));}
-export function introDraft(company:PortfolioCompany,route:Route):string{return `Hi ${route.knownBy.name.split(' ')[0]},\n\nWould you be comfortable introducing us to ${route.contact.name} at ${route.investor.name}?\n\n${company.name} is preparing its ${company.nextRound}. ${company.pitch}\n\n${route.fit}\n\nIf the fit looks right to you, we can send a short brief to forward.\n\nThanks`;}
+export function introDraft(company:PortfolioCompany,route:Route,viewerId?:string):string{
+ if(viewerId===route.knownBy.id)return `Hi ${route.contact.name.split(' ')[0]},\n\nOne of our portfolio companies, ${company.name}, is preparing its ${company.nextRound}. ${company.pitch}\n\n${route.fit}\n\nWould you be open to meeting the founders? I can send a short brief first.\n\nThanks`;
+ return `Hi ${route.knownBy.name.split(' ')[0]},\n\nWould you be comfortable introducing us to ${route.contact.name} at ${route.investor.name}?\n\n${company.name} is preparing its ${company.nextRound}. ${company.pitch}\n\n${route.fit}\n\nIf the fit looks right to you, we can send a short brief to forward.\n\nThanks`;}

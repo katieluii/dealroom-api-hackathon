@@ -9,6 +9,6 @@ try{
  writeFileSync(path.join(dir,'schema.prisma'),schema);
  const setup=spawnSync(process.execPath,['node_modules/prisma/build/index.js','db','push','--schema',path.join(dir,'schema.prisma'),'--skip-generate'],{env,stdio:'pipe',timeout:60000});
  if(setup.status!==0)throw new Error(setup.stderr?.toString()||'Test database setup failed');
- const run=spawnSync(process.execPath,['--import','tsx','--test','tests/scoring.test.ts','tests/scope.test.ts'],{env,stdio:'inherit',timeout:60000});
+ const run=spawnSync(process.execPath,['--import','tsx','--test','tests/scoring.test.ts','tests/scope.test.ts','tests/presentation.test.ts'],{env,stdio:'inherit',timeout:60000});
  process.exitCode=run.status??1;
 }finally{rmSync(dir,{recursive:true,force:true});}

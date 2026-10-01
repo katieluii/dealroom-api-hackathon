@@ -14,7 +14,7 @@ The dataset has 6 portfolio companies, 15 corporate investors, 60 contacts and 4
 
 1. Continue as Maya Chen; connect demo HubSpot, start sync, open portfolio.
 2. Select Luma Photonics. Read the investor fit and interaction evidence.
-3. Open “How is this scored?” to see the four components. The Appendix tab gives the full formula, thresholds, worked examples and limitations.
+3. Click “Activity score” to see the four components. The Appendix tab gives the full formula, thresholds, worked examples and limitations.
 4. Open “Draft intro request”, copy the draft, close it. Nothing is sent.
 5. Compare Helio Fusion under “Could use help”.
 6. Open Privacy to change sharing or hide a contact. Sign out and choose another partner to see the changed visibility.
@@ -66,8 +66,8 @@ The deployed Worker uses `MOCK_MODE=true`. No live HubSpot, Google or Dealroom c
 - Google sign-in code exists but has not been tested with configured credentials. Microsoft is a TODO.
 - Real HubSpot OAuth/sync and the new Dealroom strategic-investor adapter are not yet implemented. Their live acceptance checks remain incomplete. Real sync currently returns an explicit setup error.
 - Invitations create a signed link and open an email draft. Automatic email delivery is not configured.
-- The percentage ranks recorded activity; it is not a likelihood of securing an introduction. Email directions provide a two-way activity proxy, not proof of individual replies.
-- The user paused red-team work to prioritize deployment. This demo has not passed a completed production security review.
+- The score out of 100 ranks recorded activity; it is not a likelihood of securing an introduction. Email directions provide a two-way activity proxy, not proof of individual replies.
+- A focused UI/copy red-team pass was completed; see docs/READABILITY_REVIEW.md. This demo has not passed a completed production security review.
 - TODO: confirm Dealroom commercial redistribution terms before using real investor data in a customer product.
 
 Required future provider slots are in `.env.example`: Google OAuth, HubSpot OAuth client/secret/redirect, Dealroom key/base URL. Exact live HubSpot scopes and API behavior must be verified when implementing the connector; this demo does not request HubSpot access.

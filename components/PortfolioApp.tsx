@@ -1,27 +1,84 @@
 'use client';
 import {useCallback,useEffect,useRef,useState} from 'react';
 import type {PortfolioSummary,CompanyDetail,Route} from '@/lib/types';
-import {introDraft} from '@/lib/matching';
 import {requestJSON} from '@/lib/client';
-import Topbar from './Topbar';import Modal from './Modal';
+import Topbar from './Topbar';
+import RelationshipCard from './RelationshipCard';
+import RelationshipDialog from './RelationshipDialog';
+
 interface PortfolioResponse {companies:PortfolioSummary[];viewer:{id:string;name:string;shareWithFirm:boolean};connected:boolean;mock:boolean;syncedAt:string|null}
 export default function PortfolioApp(){
- const [data,setData]=useState<PortfolioResponse|null>(null),[selected,setSelected]=useState(''),[detail,setDetail]=useState<CompanyDetail|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[showAll,setShowAll]=useState(false),[modal,setModal]=useState<{kind:'score'|'draft';route:Route}|null>(null),[copied,setCopied]=useState(false);
- const selection=useRef(''),version=useRef(0);
- const load=useCallback(async(id?:string)=>{const run=++version.current;setBusy(true);try{const portfolio=await requestJSON<PortfolioResponse>('/api/portfolio');const target=id||selection.current||portfolio.companies[0]?.id;const next=target?await requestJSON<CompanyDetail>('/api/company/'+encodeURIComponent(target)):null;if(run!==version.current)return;setData(portfolio);setSelected(target??'');selection.current=target??'';setDetail(next);setError('');setModal(current=>current&&next?.routes.some(r=>r.id===current.route.id&&r.knownBy.id===current.route.knownBy.id)?{...current,route:next.routes.find(r=>r.id===current.route.id)!}:null);}catch(e){if(run===version.current){setError(e instanceof Error?e.message:'Could not load the portfolio.');setDetail(null);}}finally{if(run===version.current)setBusy(false)}},[]);
- useEffect(()=>{void load();const refresh=()=>{if(!document.hidden)void load()};window.addEventListener('focus',refresh);const timer=setInterval(refresh,10000);return()=>{version.current++;clearInterval(timer);window.removeEventListener('focus',refresh)}},[load]);
- async function updateMatch(route:Route,status:'confirmed'|'rejected'){setBusy(true);try{await requestJSON('/api/entity-match/'+route.match.id,{method:'POST',body:JSON.stringify({status})});await load();}catch(e){setError(e instanceof Error?e.message:'Match could not be saved.');setBusy(false)}}
- async function sync(){setBusy(true);try{const result=await requestJSON<{warning?:string}>('/api/sync',{method:'POST'});await load();if(result.warning)setError(result.warning);}catch(e){setError(e instanceof Error?e.message:'Sync failed. Cached records are unchanged.');setBusy(false)}}
- function open(kind:'score'|'draft',route:Route){setCopied(false);setModal({kind,route});}
- const routes=detail?.routes??[],shown=showAll?routes:routes.slice(0,3),hidden=routes.slice(3),under35=hidden.filter(r=>r.relationship.score<35).length;
- function routeCard(route:Route,index:number,pending=false){return <article className={'route-card '+(index===0&&!pending?'best':'')} key={route.id}>
- <div className="route-content">{index===0&&!pending&&<p className="best-label">Best route in</p>}<p className="holder-label">Relationship held by</p><h3>{route.knownBy.name}{route.knownBy.id===data?.viewer.id&&<span className="self-label"> (you)</span>}</h3><div className="relationship-path"><span aria-hidden="true">↳</span><div><b>{route.contact.name}</b><p className="role-line">{route.contact.jobTitle} at {route.investor.name}</p></div></div><p><strong>Why they fit:</strong> {route.fit}</p><p><strong>Relationship evidence:</strong> {route.relationship.evidence.join('; ')}.</p><p className="source">Based on HubSpot and Dealroom</p>{pending||route.match.status==='unconfirmed'?<div className="match-control"><span>{route.match.method==='domain'?'Domain matched':'Name match; excluded until confirmed'}</span><div><button disabled={busy} onClick={()=>void updateMatch(route,'confirmed')}>Confirm this is the same investor</button><button disabled={busy} onClick={()=>void updateMatch(route,'rejected')}>Not the same</button></div></div>:<p className="source">Investor match confirmed</p>}</div>
- <div className="route-score"><div className="score-number">{route.relationship.score}<span>%</span></div><span className={'relationship '+route.relationship.label.toLowerCase()}>{route.relationship.label} relationship</span><button className="text-button" onClick={()=>open('score',route)}>How is this scored?</button>{!pending&&<button className="primary" onClick={()=>open('draft',route)}>Draft intro request</button>}</div></article>}
- return <><Topbar mock={data?.mock??false} connected={data?.connected??false} name={data?.viewer.name??''}/><main className="workspace"><aside className="portfolio-list"><div className="list-title"><h1>Your portfolio</h1><button aria-label="Refresh portfolio" disabled={busy} onClick={()=>void load()}>↻</button></div><p className="list-description">Find who on your team can help each portfolio company reach a strategic investor.</p>{(['Could use help','Well connected'] as const).map(group=><section key={group}><h2 className={group==='Could use help'?'amber':'green'}>{group} · {data?.companies.filter(c=>c.group===group).length??0}</h2>{data?.companies.filter(c=>c.group===group).map(c=><button className={'company-row '+(selected===c.id?'selected':'')} key={c.id} aria-pressed={selected===c.id} onClick={()=>{setShowAll(false);setModal(null);selection.current=c.id;setSelected(c.id);setDetail(null);void load(c.id)}}><span><b>{c.name}</b><small>Next round: {c.nextRound}</small></span><span className="portfolio-score">{c.bestPath}%</span></button>)}</section>)}{data&&!data.companies.length&&<p>No portfolio companies yet. Add them to your firm’s database, then sync.</p>}<button className="sync-button" disabled={busy} onClick={()=>void sync()}>{busy?'Loading…':'Sync HubSpot and Dealroom'}</button><p className="source">{data?.syncedAt?'Last sync: '+new Date(data.syncedAt).toLocaleString():'No completed sync yet'}</p><a href="/onboarding">Connection and partners</a></aside>
- <section className="company-panel" aria-live="polite" aria-busy={busy}>{error&&<div className="error" role="alert">{error}<button onClick={()=>void load()}>Retry</button></div>}{!detail?<p className="empty">{busy?'Loading routes…':'Select a portfolio company.'}</p>:<><header className="company-heading"><h2>{detail.company.name}</h2><p className="sector-line">{detail.company.sectors.join(' · ')}</p><p>Team relationships that could help {detail.company.name} reach strategic investors for its {detail.company.nextRound}.</p>{detail.company.matchStatus==='unconfirmed'&&<div className="match-control"><p>Confirm the Dealroom company match before relying on its sectors.</p>{(['confirmed','rejected'] as const).map(status=><button key={status} disabled={busy} onClick={()=>void requestJSON('/api/company/'+detail.company.id,{method:'POST',body:JSON.stringify({status})}).then(()=>load()).catch(e=>setError(e.message))}>{status==='confirmed'?'Confirm company':'Not the same company'}</button>)}</div>}</header>
- {shown.length?shown.map((r,i)=>routeCard(r,i)):<div className="empty"><h3>No strategic investors found yet</h3><p>No confirmed or domain-matched route is visible. Check unconfirmed matches, sync again, or ask partners to review their sharing settings.</p></div>}
- {routes.length>0&&<footer className="route-footer"><p>Showing {shown.length} of {routes.length} relationships.{!showAll&&hidden.length>0?' '+(under35===hidden.length?`The other ${hidden.length} are cold or cool (under 35%).`:`${hidden.length} more routes; ${under35} score under 35%.`):''}</p>{routes.length>3&&<button onClick={()=>setShowAll(!showAll)}>{showAll?'Show top 3':'Show all '+routes.length+' relationships'}</button>}</footer>}
- {detail.unconfirmed.length>0&&<section className="pending-matches"><h3>Matches to confirm</h3><p>These name matches do not count towards the company’s score.</p>{detail.unconfirmed.map((r,i)=>routeCard(r,i,true))}</section>}</>}
- <p className="privacy-line">Shows counts and dates only. Message content is never displayed or stored.</p><p className="source">Investor data: Dealroom{data?.mock?' · All demo names and activity are fictional.':''}</p></section></main>
- {modal&&detail&&<Modal title={modal.kind==='score'?'How the relationship is scored':'Draft intro request'} onClose={()=>setModal(null)}>{modal.kind==='score'?<><p>{modal.route.contact.name}, known by {modal.route.knownBy.name}. This percentage ranks activity; it is not the probability of an introduction.</p><div className="score-breakdown">{([['recency','Recency',30],['frequency','Frequency',25],['twoWay','Two-way activity',25],['depth','Depth',20]] as const).map(([key,label,weight])=><div key={key}><div><label htmlFor={'score-'+key}>{label} ({weight}% weight)</label><b>{Math.round(modal.route.relationship.components[key])} / 100</b></div><progress id={'score-'+key} value={modal.route.relationship.components[key]} max={100}/></div>)}</div><p>Recency halves every 90 days. Frequency reaches 100 at 8 interactions. Depth weights meetings 1, calls 0.7, emails 0.3 and notes 0.2, capped at 6 points.</p><p>Two-way activity uses meetings, calls and the ratio of inbound to outbound emails. Email counts cannot confirm a reply to a particular message.</p><ul>{modal.route.relationship.evidence.map(e=><li key={e}>{e}</li>)}</ul></>:<><p>To {modal.route.knownBy.name}. Review before sending; Mi-Chi sends nothing.</p><textarea className="draft" aria-label="Introduction request draft" readOnly value={introDraft(detail.company,modal.route)} rows={11}/><button className="primary" onClick={()=>void navigator.clipboard.writeText(introDraft(detail.company,modal.route)).then(()=>setCopied(true)).catch(()=>setError('Copy failed. Select the draft text and copy it manually.'))}>{copied?'Copied':'Copy draft'}</button><span role="status" className="copy-status">{copied?'Draft copied to clipboard.':''}</span></>}</Modal>}</>;
+ const [data,setData]=useState<PortfolioResponse|null>(null),[selected,setSelected]=useState('');
+ const [detail,setDetail]=useState<CompanyDetail|null>(null),[error,setError]=useState('');
+ const [busy,setBusy]=useState(false),[showAll,setShowAll]=useState(false);
+ const [modal,setModal]=useState<{kind:'score'|'draft';route:Route}|null>(null);
+ const selection=useRef(''),version=useRef(0),reveal=useRef(false),heading=useRef<HTMLHeadingElement>(null);
+ const load=useCallback(async(id?:string,background=false)=>{
+  const run=++version.current;
+  if(!background)setBusy(true);
+  try{
+   const portfolio=await requestJSON<PortfolioResponse>('/api/portfolio');
+   const target=id||selection.current||portfolio.companies[0]?.id;
+   const next=target?await requestJSON<CompanyDetail>('/api/company/'+encodeURIComponent(target)):null;
+   if(run!==version.current)return;
+   setData(portfolio);setSelected(target??'');selection.current=target??'';setDetail(next);setError('');
+   setModal(current=>{
+    if(!current||!next)return null;
+    const candidates=current.kind==='score'?[...next.routes,...next.unconfirmed]:next.routes;
+    const route=candidates.find(r=>r.id===current.route.id&&r.knownBy.id===current.route.knownBy.id);
+    return route?{...current,route}:null;
+   });
+  }catch(e){if(run===version.current){setError(e instanceof Error?e.message:'Could not load the portfolio. Try again.');setDetail(null);setModal(null)}}
+  finally{if(run===version.current)setBusy(false)}
+ },[]);
+ useEffect(()=>{
+  void load();
+  const refresh=()=>{if(!document.hidden)void load(undefined,true)};
+  window.addEventListener('focus',refresh);
+  const timer=setInterval(refresh,10000);
+  return()=>{version.current++;clearInterval(timer);window.removeEventListener('focus',refresh)};
+ },[load]);
+ useEffect(()=>{if(detail&&reveal.current){reveal.current=false;heading.current?.focus({preventScroll:true});heading.current?.scrollIntoView({block:'start',behavior:'auto'})}},[detail]);
+ async function updateMatch(route:Route,status:'confirmed'|'rejected'){
+  setBusy(true);try{await requestJSON('/api/entity-match/'+route.match.id,{method:'POST',body:JSON.stringify({status})});await load()}catch(e){setError(e instanceof Error?e.message:'Match could not be saved.');setBusy(false)}
+ }
+ async function confirmCompany(status:'confirmed'|'rejected'){
+  if(!detail)return;setBusy(true);
+  try{await requestJSON('/api/company/'+detail.company.id,{method:'POST',body:JSON.stringify({status})});await load()}catch(e){setError(e instanceof Error?e.message:'Company match could not be saved.');setBusy(false)}
+ }
+ async function sync(){setBusy(true);try{const result=await requestJSON<{warning?:string}>('/api/sync',{method:'POST'});await load();if(result.warning)setError(result.warning)}catch(e){setError(e instanceof Error?e.message:'Sync failed. Try again.');setBusy(false)}}
+ function choose(id:string){setShowAll(false);setModal(null);selection.current=id;setSelected(id);setDetail(null);reveal.current=window.matchMedia('(max-width:700px)').matches;void load(id)}
+ const routes=detail?.routes??[],shown=showAll?routes:routes.slice(0,3);
+ function card(route:Route,index:number,pending=false){return <RelationshipCard key={route.id} route={route} viewerId={data?.viewer.id??''} busy={busy} pending={pending} first={index===0&&!pending} onScore={()=>setModal({kind:'score',route})} onDraft={()=>setModal({kind:'draft',route})} onMatch={status=>void updateMatch(route,status)}/>}
+ return <>
+  <Topbar mock={data?.mock??false} connected={data?.connected??false} name={data?.viewer.name??''}/>
+  <main className="workspace">
+   <aside className="portfolio-list">
+    <div className="list-title"><h1>Your portfolio</h1><button aria-label="Refresh portfolio" disabled={busy} onClick={()=>void load()}>↻</button></div>
+    <p className="list-description">Who on your team can help with the next round?</p>
+    <p className="portfolio-score-key">Best visible activity score, out of 100</p>
+    {(['Could use help','Well connected'] as const).map(group=><section key={group}>
+     <h2 className={group==='Could use help'?'amber':'green'}>{group} <span>({data?.companies.filter(c=>c.group===group).length??0})</span></h2>
+     {data?.companies.filter(c=>c.group===group).map(c=><button className={'company-row '+(selected===c.id?'selected':'')} key={c.id} aria-pressed={selected===c.id} onClick={()=>choose(c.id)}><span><b>{c.name}</b><small>{c.nextRound}</small></span><span className="portfolio-score" aria-label={`Activity score ${c.bestPath} out of 100`}>{c.bestPath}<small>/100</small></span></button>)}
+    </section>)}
+    {data&&!data.companies.length&&<p>No portfolio companies imported yet.</p>}
+    <button className="sync-button" disabled={busy} onClick={()=>void sync()}>{busy?'Loading…':data?.mock?'Refresh demo data':'Sync CRM data'}</button>
+    <p className="source">{data?.syncedAt?'Updated '+new Date(data.syncedAt).toLocaleString():'No completed sync yet'}</p>
+    <a href="/onboarding">Connection and partners</a>
+   </aside>
+   <section className="company-panel" aria-busy={busy}>
+    {error&&<div className="error" role="alert">{error}<button onClick={()=>void load()}>Retry</button></div>}
+    {!detail?<p className="empty" role="status">{busy?'Loading relationships…':error?'':'Select a portfolio company.'}</p>:<>
+     <header className="company-heading"><h2 ref={heading} tabIndex={-1}>{detail.company.name}</h2><p className="sector-line">{detail.company.sectors.join(', ')} • Raising {detail.company.nextRound}</p><p>Team connections to potential strategic investors.</p>
+      {detail.company.matchStatus==='unconfirmed'&&<div className="match-control"><p>Check this company’s investor-data match.</p><button disabled={busy} onClick={()=>void confirmCompany('confirmed')}>Confirm company</button><button disabled={busy} onClick={()=>void confirmCompany('rejected')}>Not the same company</button></div>}
+     </header>
+     {detail.company.matchStatus==='rejected'?<div className="empty"><h3>Company match rejected</h3><p>Relationships are hidden because this company’s investor-data match was rejected.</p><button disabled={busy} onClick={()=>void confirmCompany('confirmed')}>Restore this company match</button></div>:shown.length?shown.map((r,i)=>card(r,i)):<div className="empty"><h3>No confirmed routes yet</h3><p>Check the investor matches below, or ask teammates to review their sharing settings.</p></div>}
+     {routes.length>0&&<footer className="route-footer"><p>{shown.length} of {routes.length} relationships, ranked by activity.</p>{routes.length>3&&<button onClick={()=>setShowAll(!showAll)}>{showAll?'Show top 3':`Show all ${routes.length}`}</button>}</footer>}
+     {detail.unconfirmed.length>0&&<details className="pending-matches"><summary>{detail.unconfirmed.length} investor {detail.unconfirmed.length===1?'match':'matches'} to check</summary><p>Excluded until confirmed.</p>{detail.unconfirmed.map((r,i)=>card(r,i,true))}</details>}
+    </>}
+    <footer className="data-note"><p>Contact details, activity counts and dates only. Message content is never displayed or stored.</p><p>{data?.mock?'Fictional demo data. HubSpot and Dealroom are not connected.':'Activity: HubSpot. Investor data: Dealroom.'}</p></footer>
+   </section>
+  </main>
+  {modal&&detail&&<RelationshipDialog key={modal.kind+modal.route.id} kind={modal.kind} route={modal.route} company={detail.company} viewerId={data?.viewer.id??''} onClose={()=>setModal(null)}/>}
+ </>;
 }

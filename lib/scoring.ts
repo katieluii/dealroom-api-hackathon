@@ -21,6 +21,6 @@ export function scoreRelationship(interactions:Interaction[],asOf=new Date().toI
  if(counts.call)evidence.push(`${counts.call} call${counts.call===1?'':'s'} in 12 months`);
  if(counts.email)evidence.push(`${inbound} inbound, ${outbound} outbound emails${counts.email-inbound-outbound?`; ${counts.email-inbound-outbound} direction unknown`:''}`);
  if(counts.note)evidence.push(`${counts.note} CRM note${counts.note===1?'':'s'} logged (content not read)`);
- evidence.push(days===null?'No contact in the last 12 months':days===0?'Last contact today':days<14?`Last contact ${days} day${days===1?'':'s'} ago`:`Last contact ${Math.floor(days/7)} weeks ago`);
+ evidence.push(days===null?'No logged activity in the last 12 months':days===0?'Latest logged activity today':days<14?`Latest logged activity ${days} day${days===1?'':'s'} ago`:`Latest logged activity ${Math.floor(days/7)} weeks ago`);
  return {score,label:score>=70?'Strong':score>=40?'Warm':score>=25?'Cool':'Cold',components:{recency,frequency,twoWay,depth},evidence,lastContact:last===undefined?null:new Date(last).toISOString(),counts,inbound,outbound};
 }

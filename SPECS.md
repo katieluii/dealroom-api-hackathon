@@ -93,3 +93,12 @@ Decisions: sectors are JSON string arrays for SQLite/Postgres parity. Firm's fir
 - Add an Appendix navigation tab explaining the implemented scoring formula, four components, thresholds, team aggregation, privacy visibility, and limits.
 - Worked examples use the actual pure scoring function; documentation must disclose note-based recency and the email denominator fallback.
 - General scoring methodology is public; the appendix exposes no CRM data. Deploy and verify the new page.
+
+## 2026-10-01 — Readability and truthful demo review
+
+- Focused red-team: UI/UX and copy/evidence. Apply concrete findings, verify in browser, deploy. No live integrations in this pass.
+- Retain palette: background #EEF1F5, white #FFFFFF, ink #182435, muted #526174, action #235BCC, divider #D5DDE7. Instrument Sans: 30px company, 24px teammate, 16px body, 14px supporting labels.
+- Layout: portfolio | teammate → external contact at investor; activity evidence and fit below; one draft action. Names carry hierarchy; score is secondary. Left aligned, no decorative motion.
+- Compared with the existing large-percent/card treatment: remove repeated source lines and exposed match buttons; keep one honest data-source footer, visible evidence, and expandable identity comparisons.
+- Label scores as activity out of 100, preserve scoring mathematics. Distinguish notes from actual contact, and real data sources from fictional fixtures.
+- Drafts for own contacts address the contact directly. Copy errors stay in the dialog. Pending-match modals survive refresh; narrow-screen selection reveals the result. Server failures show readable errors.
