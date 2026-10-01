@@ -4,10 +4,14 @@
 
 - Mi-Chi is now a strategic-investor relationship demo for early-stage deeptech VC portfolios. The previous round-builder is superseded (checkpoint ef422f3).
 - Live: https://mi-chi-demo.katieluikakiu.workers.dev . Cloudflare Worker mi-chi-demo, D1 database 3390c21c-553e-4d00-9513-17911c912bdb, personal Cloudflare account 325cee91a2a8d96b12227b5370f01464.
+- Repository verified at main de69511 before this documentation wrap-up; main and origin/main have zero divergent commits.
 - Main integration: PR #1 from codex/strategic-crm in katieluii/dealroom-api-hackathon. Merged feature branches deleted at user request; only main remains locally and remotely. PR: https://github.com/katieluii/dealroom-api-hackathon/pull/1 .
 - User approved D1 and patched Next.js 15 (15.5.27). Workers Paid is active. User resumed the focused red-team/frontend-design readability pass; completed and deployed.
 
 ## Completed
+
+- User purchased Workers Paid directly. Dashboard confirmed Paid is current; portfolio and scoring dialog passed live verification after the upgrade. Previous Free-plan CPU errors no longer reproduced in that check.
+- Wrap-up: Slack completion summary sent; project-scoped memory records scope, fixture boundary and interface decisions. No numbered tracker row exists, so tracker and Pending Katie were not changed.
 
 - Deleted merged local branches codex/initial-build-plan (ef422f3) and codex/strategic-crm (57b1894), plus remote codex/strategic-crm. All tips verified as ancestors of main d0352d6; remote deletion guarded against concurrent updates. Ref recovery record: .git/branch-cleanup-2026-10-01.json.
 
@@ -18,11 +22,11 @@
 
 - Added public /appendix and Appendix navigation tab: exact scoring formula, weights, label bands, team aggregation, limitations and four examples computed by scoreRelationship. Production build passed; deployed page visually checked, examples verified as 100 Strong / 53 Warm / 39 Cool / 12 Cold.
 
-- Relationship cards now lead with the internal team member under “Relationship held by”, followed by the external contact and investor. Removed “How you know them”. Hosted Maya view verified with Alex and Jo routes for Luma; sharing remains enforced by the data layer. TypeScript and Cloudflare build passed for this update.
+- Relationship cards now lead with the internal team member under “On your team”, followed by the external contact and investor. Removed “How you know them”. Hosted Maya view verified with Alex and Jo routes for Luma; sharing remains enforced by the data layer. TypeScript and Cloudflare build passed for this update.
 
 - Strict TypeScript Next.js App Router, Prisma schema with tenant IDs, local SQLite and Cloudflare D1 adapters.
 - Fictional fixtures: 6 portfolio companies, 15 corporate investors, 60 contacts, 400 interactions, 4 partners. Real-user sharing defaults off; hosted fictional Alex/Sam/Jo configured as opted in via 0003_shared_demo_team.sql; expected groups 2 could use help / 4 well connected.
-- Scoring, Dealroom-fixture fit evidence, route matching, tenant/partner visibility through lib/scope.ts. Five tests pass including firm separation, hidden contacts, sharing changes, match eligibility and deletion.
+- Scoring, Dealroom-fixture fit evidence, route matching, tenant/partner visibility through lib/scope.ts. The eight-test suite includes firm separation, hidden contacts, sharing changes, match eligibility and deletion.
 - Mock sign-in, three-step onboarding, sync, portfolio, company selection, scoring dialog, draft modal, matching controls and privacy UI. Latest cool-grey/Instrument Sans design supersedes Renascor.
 - Local browser verified sign-in, connect/sync, portfolio groups and scoring dialog. Hosted browser verified sign-in, mock connect, sync (15 contacts / 100 events for Maya), portfolio groups and draft dialog.
 - TypeScript and production OpenNext build passed. D1 migrations applied locally and remotely. Deployed version 0c84dee7-a4c1-424b-93f1-d88b8f10c2b8.
@@ -30,8 +34,6 @@
 - README has setup, deployment and demo walkthrough. .env.example has required provider slots. Git ignores generated builds, database files and secret files.
 
 ## Known Issues
-
-- User purchased Workers Paid directly. Dashboard confirmed Paid is current; portfolio and scoring dialog passed live verification after the upgrade. Previous Free-plan CPU errors no longer reproduced in that check.
 
 - Real HubSpot OAuth/sync and the NEW Dealroom corporate-investor adapter are not implemented; only mock data works. Google sign-in exists but lacks configured credentials and live verification. No real provider acceptance check is complete.
 - UI/copy review is complete. Backend security review remains incomplete: invite-cookie consumption, GET mock-connect mutation and disconnect/sync races remain open. Mobile selection focus/scroll is implemented but was not tested in a resized browser. Do not claim production readiness.
