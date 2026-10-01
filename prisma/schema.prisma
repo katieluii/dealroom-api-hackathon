@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+model Firm {
+  id String @id
+  firmId String @unique
+  name String
+  users User[]
+}
+model User {
+  id String @id @default(cuid())
+  firmId String
+  firm Firm @relation(fields: [firmId], references: [id])
+  email String @unique
+  name String
+  shareWithFirm Boolean @default(false)
+  onboarded Boolean @default(false)
+  @@index([firmId])
+}
+model CrmConnection {
+  id String @id @default(cuid())
+  firmId String
+  userId String
+  provider String
+  encryptedAccessToken String
+  encryptedRefreshToken String
+  expiresAt DateTime
+  syncedAt DateTime?
+  @@unique([firmId,userId,provider])
+}
+model Contact {
+  id String @id @default(cuid())
+  firmId String
+  crmId String
+  name String
+  jobTitle String
+  orgName String
+  emailDomain String
+  ownerUserId String
+  @@unique([firmId,ownerUserId,crmId])
+  @@index([firmId])
+}
+model Interaction {
+  id String @id @default(cuid())
+  firmId String
+  crmId String
+  contactId String
+  userId String
+  type String
+  date DateTime
+  direction String?
+  @@unique([firmId,userId,crmId,contactId])
+  @@index([firmId,contactId,userId])
+}
+model HiddenContact {
+  id String @id @default(cuid())
+  firmId String
+  userId String
+  contactId String
+  @@unique([firmId,userId,contactId])
+}
+model PortfolioCompany {
+  id String @id @default(cuid())
+  firmId String
+  name String
+  domain String
+  pitch String
+  dealroomId String?
+  matchMethod String?
+  matchStatus String @default("unconfirmed")
+  sectors Json
+  nextRound String
+  @@unique([firmId,domain])
+}
+model EntityMatch {
+  id String @id @default(cuid())
+  firmId String
+  contactId String
+  dealroomInvestorId String
+  method String
+  status String @default("unconfirmed")
+  @@unique([firmId,contactId,dealroomInvestorId])
+}
+model DealroomCache {
+  id String @id @default(cuid())
+  firmId String
+  kind String
+  key String
+  json Json
+  fetchedAt DateTime @default(now())
+  @@unique([firmId,kind,key])
+}

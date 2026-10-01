@@ -1,0 +1,2 @@
+import {apiResponse,ServiceError} from '@/lib/http';import {syncMock} from '@/lib/scope';
+export async function POST(request:Request){return apiResponse(request,async scope=>{if(!await scope.connection())throw new ServiceError('Connect HubSpot first.',400);if(process.env.MOCK_MODE==='true')return syncMock(scope);throw new ServiceError('Live sync is being configured. Cached data is unchanged.');});}

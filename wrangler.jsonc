@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mi-chi-demo",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": {"directory": ".open-next/assets", "binding": "ASSETS"},
+  "d1_databases": [{"binding": "DB", "database_name": "mi-chi-demo", "database_id": "3390c21c-553e-4d00-9513-17911c912bdb", "migrations_dir": "prisma/d1-migrations"}],
+  "vars": {"NEXTAUTH_URL": "https://mi-chi-demo.katieluikakiu.workers.dev", "MOCK_MODE": "true", "CLOUDFLARE_DEPLOYMENT": "true", "DATABASE_URL": "file:./dev.db"}
+}

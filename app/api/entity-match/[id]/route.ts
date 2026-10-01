@@ -1,0 +1,2 @@
+import {apiResponse,bodyObject} from '@/lib/http';import {ScopeError} from '@/lib/scope';
+export async function POST(request:Request,{params}:{params:Promise<{id:string}>}){return apiResponse(request,async scope=>{const body=await bodyObject(request);if(body.status!=='confirmed'&&body.status!=='rejected')throw new ScopeError('Choose confirm or reject.',400);await scope.setMatch((await params).id,body.status);return {ok:true};});}
