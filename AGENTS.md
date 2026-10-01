@@ -13,7 +13,7 @@ Goal: build a working, honest hackathon demo using the Dealroom API.
 
 ## How to run
 
-`npm install`, `cp .env.example .env.local`, `npm run dev`. Verify with `npm test`, `npm run typecheck`, `npm run build`. Keep mock fixtures labelled. Renascor palette and type apply to mi-chi; avoid generic marketing copy.
+`npm install`, `cp .env.example .env.local`, `npm run dev`. Verify with `npm test`, `npm run typecheck`, `npm run build`. Keep mock fixtures labelled. Latest CRM specification supersedes the older Renascor treatment: cool grey #EEF1F5, Instrument Sans, minimum 14px text. Product name: Mi-Chi.
 
 ## Handoff
 

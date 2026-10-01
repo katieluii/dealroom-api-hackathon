@@ -1,47 +1,73 @@
-# mi-chi
+# Mi-Chi
 
-Build a funding round for a portfolio company: one lead, two followers, one strategic investor. Compare sector fit, shared investments and portfolio conflicts on a graph.
-
-## Run
-
-Requires Node.js 20+.
-
-```bash
-npm install
-cp .env.example .env.local
-npm run dev
-```
-
-Open http://127.0.0.1:3000. `MOCK_MODE=true` works without credentials using fictional companies, 25 investors and 60 rounds.
-
-For Dealroom, set `MOCK_MODE=false`, `DEALROOM_BASE_URL` and `DEALROOM_ENV_FILE` to the absolute path of the supplied OAuth credentials file. Alternatively provide `DEALROOM_API_KEY` and `DEALROOM_CLIENT_ID`. All API calls and response mapping live in `lib/dealroom.ts`. Responses are cached for 15 minutes in memory and `data/cache/`, which is excluded from Git. API failures show a notice and the fictional demo company.
-
-Set `ANTHROPIC_API_KEY` for Claude tool use. `ANTHROPIC_MODEL` defaults to `claude-sonnet-4-6`. Without the key, the three suggested prompts use labelled scripted commands. Open-ended Claude chat remains unverified until a key is supplied.
+Find the people your team knows at potential strategic investors for your portfolio.
 
 ## Demo
 
-1. Click **Load demo company**.
-2. Click **Why this lead?** for named co-investments and inferred lead counts.
-3. Open an **Overlap to check** badge to inspect the portfolio company.
-4. Click **Find a non-US lead**, then inspect the updated graph.
-5. Use **Replace with** to swap an investor.
-6. Click **Export round plan** to download Markdown.
+[Open Mi-Chi](https://mi-chi-demo.katieluikakiu.workers.dev)
 
-## Checks and limits
+The hosted demo uses Cloudflare Workers and D1. All companies, investors, contacts and activity are fictional. Choose one of four partners, connect the simulated HubSpot account, sync, then open the portfolio.
 
-```bash
-npm run check:mock
+The dataset has 6 portfolio companies, 15 corporate investors, 60 contacts and 400 interactions. Each partner starts with sharing off. Demo accounts share persistent state, so another visitor can change their settings.
+
+### 60-second walkthrough
+
+1. Continue as Maya Chen; connect demo HubSpot, start sync, open portfolio.
+2. Select Luma Photonics. Read the investor fit and interaction evidence.
+3. Open “How is this scored?” to see the four components.
+4. Open “Draft intro request”, copy the draft, close it. Nothing is sent.
+5. Compare Helio Fusion under “Could use help”.
+6. Open Privacy to change sharing or hide a contact. Sign out and choose another partner to see the changed visibility.
+
+## Local setup
+
+Requires Node 22 and npm.
+
+```sh
+npm install
+cp .env.example .env.local
+# Fill NEXTAUTH_SECRET and ENCRYPTION_KEY with random values; keep MOCK_MODE=true.
+# DATABASE_URL=file:./dev.db and NEXTAUTH_URL=http://127.0.0.1:3000
+npm run db:setup
+npm run seed
+npm run dev
+```
+
+Generate secrets with `openssl rand -hex 32` (run once per key). `ENCRYPTION_KEY` must be 64 hex characters. Never commit `.env.local`.
+
+```sh
 npm test
 npm run typecheck
+npm run check:mock
 npm run build
 ```
 
-Next.js 14, React, strict TypeScript, Tailwind, react-force-graph-2d and Anthropic SDK. No database or authentication; run locally. Sessions expire after an hour and reset when the server restarts.
+The canonical Prisma schema uses Postgres. `scripts/database.mjs` derives a SQLite schema for a `file:` DATABASE_URL. Cloudflare uses Prisma's D1 adapter; multi-statement imports/deletions use D1 batches because D1 does not support Prisma interactive transactions.
 
-Live mapping was checked against Dealroom records for Celestial AI. The current query samples 25 investors and loads up to two portfolio companies per shortlisted investor. It may leave slots empty, including the strategic slot. It is not an exhaustive investor search or conflict clearance. Industry and sub-industry tags drive live category fit; generic sector tags are excluded. Company stage is its latest disclosed VC round. Round dates are normalised to the first day of the recorded month. Cold requests may take longer than ten seconds; cached company loads are fast.
+## Cloudflare
 
-Co-investment does not confirm a warm introduction. Lead attribution may be inferred from cheque size or listing order and is labelled. Scores support screening, not investment decisions.
+Next.js was upgraded to **15.5.27** with approval to use a patched release and the current OpenNext adapter. D1 was explicitly approved for the demo.
 
-Visual style follows the requested Renascor palette and typography: white, ink, gold, Georgia headings and Helvetica body. The product identity remains mi-chi. Review results are in `docs/REVIEW.md`.
+```sh
+npx wrangler login --scopes account:read user:read workers_scripts:write d1:write
+npx wrangler d1 migrations apply mi-chi-demo --remote
+npm run cf:build
+npm run cf:deploy
+```
 
-Stretch ideas: verified introduction paths from founder and VC networks, wider paginated investor coverage, target round stage selection.
+Set `NEXTAUTH_SECRET` and `ENCRYPTION_KEY` using Wrangler secrets. Set `NEXTAUTH_URL` in `wrangler.jsonc` to the deployed HTTPS origin. For local Workers preview, put fresh secrets and `NEXTAUTH_URL=http://127.0.0.1:8787` in ignored `.dev.vars`, run D1 migrations with `--local`, then `npm run cf:preview`.
+
+The deployed Worker uses `MOCK_MODE=true`. No live HubSpot, Google or Dealroom credentials are uploaded. `prisma/d1-migrations/0002_mock.sql` contains fictional fixtures only; do not apply it to a live customer database.
+
+## Current boundaries
+
+- Working mock sign-in, onboarding, portfolio, matching controls, scoring modal, draft copying and privacy controls.
+- Database reads go through `lib/scope.ts`; tests cover firm separation, sharing off, hidden contacts, match eligibility and deletion.
+- Google sign-in code exists but has not been tested with configured credentials. Microsoft is a TODO.
+- Real HubSpot OAuth/sync and the new Dealroom strategic-investor adapter are not yet implemented. Their live acceptance checks remain incomplete. Real sync currently returns an explicit setup error.
+- Invitations create a signed link and open an email draft. Automatic email delivery is not configured.
+- The percentage ranks recorded activity; it is not a likelihood of securing an introduction. Email directions provide a two-way activity proxy, not proof of individual replies.
+- The user paused red-team work to prioritize deployment. This demo has not passed a completed production security review.
+- TODO: confirm Dealroom commercial redistribution terms before using real investor data in a customer product.
+
+Required future provider slots are in `.env.example`: Google OAuth, HubSpot OAuth client/secret/redirect, Dealroom key/base URL. Exact live HubSpot scopes and API behavior must be verified when implementing the connector; this demo does not request HubSpot access.

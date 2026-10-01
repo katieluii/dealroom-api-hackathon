@@ -1,0 +1,3 @@
+import {apiResponse,bodyObject} from '@/lib/http';import {ScopeError} from '@/lib/scope';
+export async function GET(request:Request){return apiResponse(request,scope=>scope.privacy());}
+export async function POST(request:Request){return apiResponse(request,async scope=>{const body=await bodyObject(request);if(body.shareWithFirm!==undefined&&typeof body.shareWithFirm!=='boolean')throw new ScopeError('Sharing must be on or off.',400);if(body.contactId!==undefined&&(typeof body.contactId!=='string'||typeof body.hidden!=='boolean'))throw new ScopeError('Invalid contact setting.',400);await scope.setPrivacy({shareWithFirm:body.shareWithFirm as boolean|undefined,contactId:body.contactId as string|undefined,hidden:body.hidden as boolean|undefined});return scope.privacy();});}

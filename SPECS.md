@@ -52,3 +52,32 @@ The user's supplied Roundtable spec supersedes the individual-investor Relay pla
 ## mi-chi style and copy, 2026-10-01
 
 Product name: mi-chi. Renascor visual style requested: white background, ink #101512, gold #C9A227, Georgia Regular main heading, Helvetica Neue body, square panels. Remove slogans, duplicate instructions and decorative glyphs. Preserve mock/live labels, evidence, conflicts and actionable errors. Run anti-ai-code, anti-ai-writing, frontend-design and an inline red-team review. Broader company sourcing and personal introduction mapping remain outside this round-assembly prototype.
+
+## Strategic CRM routes, superseding round assembly (2026-10-01)
+
+Goal: let an early-stage deeptech VC firm see its strongest permitted routes to corporate venture investors for each portfolio company.
+
+1. All tenant data reads/writes shall pass through lib/scope.ts using the authenticated user's firm; cross-firm IDs shall not return data.
+2. Users shall see their own relationships and only explicitly shared, non-hidden colleague relationships; sharing defaults off.
+3. Tokens shall be encrypted with AES-256-GCM; contact bodies, notes and transcripts shall never be requested or stored.
+4. Mock fixtures shall contain six companies, fifteen corporate investors, sixty contacts and four hundred interactions across four partners.
+5. Scoring shall use twelve months of permitted metadata and return components, counts and dates; the initial demo shall show two companies needing help and four well connected.
+6. Only confirmed or non-rejected domain matches to Dealroom corporate candidates with overlapping sectors shall count as routes.
+7. Selecting a company shall update routes; scoring and copyable intro-draft modals shall work without sending messages.
+8. Mock sign-in and three-step onboarding shall lead to the portfolio screen before live integration work starts.
+9. Live Google and per-user HubSpot OAuth shall use server-side credentials and verified scopes, with visible errors and cache fallback.
+10. Disconnect shall remove the user's CRM tokens, interactions, owned contacts/matches and hidden-contact records.
+11. UI shall use Instrument Sans, #EEF1F5, minimum14px type and44px controls, visible focus, named labels and the required metadata privacy statement.
+
+Out of scope: previous lead/follower/strategic round assembly, Gmail, Calendar, Slack, automatic intro sending, LLM chat.
+
+Verification: pure score tests, real SQLite scope/sharing tests, browser sign-in/onboarding/selection/modals/copy/privacy flow, typecheck and production build; live OAuth tests require configured provider credentials. Checkpoints are confirmed by executable results rather than repeated permission questions, as requested.
+
+Decisions: sectors are JSON string arrays for SQLite/Postgres parity. Firm's firmId equals its id. Invitation email uses a generated signed link and mailto draft until a delivery provider is configured (TODO); joining requires the invited verified Google email. Email direction provides an inbound/outbound response proxy, not proof that a specific message received a reply; evidence states counts directly. Portfolio scores are rankings expressed as percentages, not probabilities. Footer counts use the actual threshold rather than claiming all omitted routes are under35.
+
+## 2026-10-01 — Cloudflare demo deployment
+
+- User approved Cloudflare D1 for the demo and a patched Next.js 15 upgrade for adapter compatibility and security fixes.
+- Deploy fictional data only on Workers with the D1 Prisma adapter. Keep secrets server-side in Worker secrets.
+- Verify hosted sign-in, mock onboarding/sync, portfolio selection, scoring modal and draft copying.
+- User paused red-team work; complete deployment first. Live provider integrations and the unfinished review remain open.

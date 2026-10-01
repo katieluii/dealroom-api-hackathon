@@ -1,0 +1,2 @@
+import {redirect} from 'next/navigation';import {currentScope} from '@/lib/auth';import Onboarding from '@/components/Onboarding';
+export default async function Page({searchParams}:{searchParams:Promise<{error?:string}>}){let scope;try{scope=await currentScope()}catch{redirect('/signin')}const connection=await scope.connection();return <Onboarding name={scope.viewer.name} mock={process.env.MOCK_MODE==='true'} connected={!!connection} synced={!!connection?.syncedAt} error={!!(await searchParams).error}/>;}

@@ -1,140 +1,15 @@
-export type InvestorType = "vc" | "corporate" | "angel" | "other";
-export interface Company {
-  id: string;
-  name: string;
-  description: string;
-  stage: string;
-  sectors: string[];
-  country: string;
-  region: string;
-  foundedYear: number;
-  totalRaised: number;
-  investorIds: string[];
-}
-export interface Investor {
-  id: string;
-  name: string;
-  type: InvestorType;
-  hqCountry: string;
-  hqRegion: string;
-  stages: string[];
-  sectors: string[];
-  typicalChequeMin?: number;
-  typicalChequeMax?: number;
-  lastInvestmentDate?: string;
-  corporateBacking?: boolean;
-}
-export interface Round {
-  id: string;
-  companyId: string;
-  companyName?: string;
-  stage: string;
-  date: string;
-  amount?: number;
-  investorIds: string[];
-  leadInvestorIds: string[];
-  leadIsInferred: boolean;
-  investorCheques?: Record<string, number>;
-}
-export interface Investment {
-  investorId: string;
-  companyId: string;
-  roundId: string;
-  stage: string;
-  date: string;
-  isLead?: boolean;
-  company?: Company;
-}
-export interface ChemistryEvidence {
-  companyName: string;
-  companyId: string;
-  roundId: string;
-  stage: string;
-  date: string;
-  followedOn: boolean;
-}
-export interface Chemistry {
-  score: number;
-  evidence: ChemistryEvidence[];
-}
-export interface Fit {
-  score: number;
-  reasons: string[];
-}
-export interface LeadEvidence {
-  score: number;
-  led: number;
-  total: number;
-  inferred: number;
-}
-export type ConflictLevel = "hard" | "soft" | "clear";
-export interface Conflict {
-  status: ConflictLevel;
-  competitors: { company: Company; reasons: string[]; date: string }[];
-}
-export type SlotName = "lead" | "follower1" | "follower2" | "strategic";
-export interface Constraints {
-  excludeInvestorIds?: string[];
-  requireRegion?: string;
-  excludeRegion?: string;
-  forceSlot?: Partial<Record<SlotName, string>>;
-}
-export interface EngineContext {
-  rounds: Round[];
-  portfolios: Record<string, Investment[]>;
-  asOf?: string;
-}
-export interface Slot {
-  slot: SlotName;
-  investor: Investor;
-  fit: Fit;
-  leadEvidence: LeadEvidence;
-  chemistryWithLead: Chemistry;
-  conflict: Conflict;
-  reasons: string[];
-  alternatives: Investor[];
-}
-export interface Syndicate {
-  company: Company;
-  slots: Slot[];
-  constraints: Constraints;
-  warnings: string[];
-  asOf: string;
-}
-export interface Dataset {
-  companies: Company[];
-  investors: Investor[];
-  rounds: Round[];
-}
-export interface GraphNode {
-  id: string;
-  name: string;
-  role: string;
-  conflict: ConflictLevel;
-  x?: number;
-  y?: number;
-  fx?: number;
-  fy?: number;
-}
-export interface GraphLink {
-  source: string;
-  target: string;
-  count: number;
-  kind: "round" | "chemistry";
-  label: string;
-}
-export interface GraphData {
-  nodes: GraphNode[];
-  links: GraphLink[];
-}
-export type DataMode = "mock" | "live" | "cached";
-export interface RoundResponse {
-  sessionId: string;
-  round: Syndicate;
-  graph: GraphData;
-  message: string;
-  mode: DataMode;
-  warning?: string;
-  agentMode: "claude" | "scripted";
-  changedSlots: SlotName[];
-}
+export type InteractionType = 'meeting'|'call'|'email'|'note';
+export type Direction = 'inbound'|'outbound';
+export interface Viewer {id:string;firmId:string;name:string;email:string;shareWithFirm:boolean;onboarded:boolean}
+export interface Contact {id:string;firmId:string;crmId:string;name:string;jobTitle:string;orgName:string;emailDomain:string;ownerUserId:string}
+export interface Interaction {id:string;firmId:string;crmId:string;contactId:string;userId:string;type:InteractionType;date:string;direction?:Direction}
+export interface PortfolioCompany {id:string;firmId:string;name:string;domain:string;pitch:string;dealroomId?:string;matchMethod?:'domain'|'name';matchStatus:'unconfirmed'|'confirmed'|'rejected';sectors:string[];nextRound:string}
+export interface EntityMatch {id:string;firmId:string;contactId:string;dealroomInvestorId:string;method:'domain'|'name';status:'unconfirmed'|'confirmed'|'rejected'}
+export interface DealroomInvestor {id:string;name:string;domain?:string;type:'corporate'|'other';hqCountry:string;sectors:string[];stages:string[];recentInvestments:{companyName:string;sectors:string[];date:string;stage:string}[]}
+export interface DealroomCompany {id:string;name:string;domain?:string;sectors:string[];stage:string;country:string;totalRaised?:number}
+export interface RelationshipScore {score:number;label:'Strong'|'Warm'|'Cool'|'Cold';components:{recency:number;frequency:number;twoWay:number;depth:number};evidence:string[];lastContact:string|null;counts:Record<InteractionType,number>;inbound:number;outbound:number}
+export interface Route {id:string;contact:Contact;investor:DealroomInvestor;match:EntityMatch;knownBy:{id:string;name:string};relationship:RelationshipScore;fit:string;eligible:boolean}
+export interface VisibleSnapshot {viewer:Viewer;partners:Pick<Viewer,'id'|'name'>[];contacts:Contact[];interactions:Interaction[];matches:EntityMatch[];companies:PortfolioCompany[];investors:DealroomInvestor[];candidates:Record<string,string[]>;connected:boolean;syncedAt:string|null}
+export interface PortfolioSummary extends PortfolioCompany {bestPath:number;group:'Could use help'|'Well connected';routeCount:number}
+export interface CompanyDetail {company:PortfolioSummary;routes:Route[];unconfirmed:Route[]}
+export interface MockFixture {asOf:string;partners:{id:string;name:string;email:string}[];companies:Omit<PortfolioCompany,'firmId'>[];investors:DealroomInvestor[];contacts:Omit<Contact,'firmId'>[];interactions:Omit<Interaction,'firmId'>[];matches:Omit<EntityMatch,'firmId'>[]}

@@ -1,0 +1,10 @@
+import nextEnv from '@next/env';
+const {loadEnvConfig}=nextEnv;
+import {readFileSync,writeFileSync} from 'node:fs';
+import {spawnSync} from 'node:child_process';
+loadEnvConfig(process.cwd());
+const schema=readFileSync('prisma/schema.prisma','utf8');
+writeFileSync('prisma/runtime.prisma',process.env.DATABASE_URL?.startsWith('file:')?schema.replace('provider = "postgresql"','provider = "sqlite"'):schema);
+const result=spawnSync(process.execPath,['node_modules/prisma/build/index.js',...process.argv.slice(2),'--schema','prisma/runtime.prisma'],{stdio:'inherit',env:process.env,timeout:120000});
+if(result.error)throw result.error;
+process.exit(result.status??1);

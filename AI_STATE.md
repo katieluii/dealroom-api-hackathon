@@ -2,33 +2,33 @@
 
 ## Current Context
 
-- mi-chi is a Next.js 14 round-assembly prototype for early-stage VC portfolio fundraising.
-- Public repo: katieluii/dealroom-api-hackathon. Branch: codex/initial-build-plan; base 8ff8985.
-- User requested Renascor house style and minimal copy; applied white/ink/gold, Georgia main heading, Helvetica body, square panels.
+- Mi-Chi is now a strategic-investor relationship demo for early-stage deeptech VC portfolios. The previous round-builder is superseded (checkpoint ef422f3).
+- Live: https://mi-chi-demo.katieluikakiu.workers.dev . Cloudflare Worker mi-chi-demo, D1 database 3390c21c-553e-4d00-9513-17911c912bdb, personal Cloudflare account 325cee91a2a8d96b12227b5370f01464.
+- Branch codex/strategic-crm; public repo katieluii/dealroom-api-hackathon. Remote main remains 8ff8985 (fetched 2026-10-01).
+- User approved D1 and patched Next.js 15 (15.5.27), then explicitly paused red-team work to prioritize deployment. Do not resume that review without further direction.
 
 ## Completed
 
-- 25 labelled fictional investors, 31 companies and 60 historical rounds; fixture check passed.
-- Pure fit, lead, chemistry, conflict and syndicate engine; graph, cards, swaps, evidence dialogs, Markdown export.
-- Eight-tool Claude route with session state and rollback on provider failure. Scripted demo commands work without a key.
-- Dealroom OAuth adapter, response mapping, bounded queries and memory/JSON caching. Earlier Cloudflare 403 is no longer reproduced: Celestial AI loaded with 43 historical rounds.
-- Browser verified explanation, competitor details, non-US lead change, live cached company search and downloaded Markdown content.
-- 12 tests and TypeScript passed. Production build passed. Anti-AI Python scanner: two files, zero gate/advisory findings; TypeScript reviewed manually.
-- Inline red-team: two fresh lenses plus independent high-severity verification. Seven findings fixed; regression tests cover locks, expired sessions, invalid swaps and export omissions. Details: docs/REVIEW.md.
-- Remote fetched 2026-10-01; no upstream changes before publication.
+- Strict TypeScript Next.js App Router, Prisma schema with tenant IDs, local SQLite and Cloudflare D1 adapters.
+- Fictional fixtures: 6 portfolio companies, 15 corporate investors, 60 contacts, 400 interactions, 4 partners. Default sharing off; expected groups 2 could use help / 4 well connected.
+- Scoring, Dealroom-fixture fit evidence, route matching, tenant/partner visibility through lib/scope.ts. Five tests pass including firm separation, hidden contacts, sharing changes, match eligibility and deletion.
+- Mock sign-in, three-step onboarding, sync, portfolio, company selection, scoring dialog, draft modal, matching controls and privacy UI. Latest cool-grey/Instrument Sans design supersedes Renascor.
+- Local browser verified sign-in, connect/sync, portfolio groups and scoring dialog. Hosted browser verified sign-in, mock connect, sync (15 contacts / 100 events for Maya), portfolio groups and draft dialog.
+- TypeScript and production OpenNext build passed. D1 migrations applied locally and remotely. Deployed version f2cd0e5e-2f1a-44bf-8c10-623f3608c8c4.
+- Worker secrets contain fresh demo-only session/encryption keys; no real provider credentials uploaded. NEXTAUTH_URL set to the live origin. Preview URLs disabled.
+- README has setup, deployment and demo walkthrough. .env.example has required provider slots. Git ignores generated builds, database files and secret files.
 
 ## Known Issues
 
-- No Anthropic key configured; real Claude tool-use execution remains unverified.
-- Live candidate search samples 25 investors; hydration covers up to 12 investors and two portfolio companies each. Tested sample fills three slots; no strategic investor found. Fit can be unknown. Cold API requests can exceed ten seconds.
-- Live company stage is latest disclosed VC round, not an independently chosen next round. Dates normalised to month.
-- Responsive styles exist, but mobile viewport has not been browser-tested.
-- No personal contact graph; co-investment is not proof of a warm introduction.
-- Local .env.local points to the supplied credentials file, with MOCK_MODE=false. Credentials and live caches are ignored by Git. The prior HTML sketch in frontend/ is ignored and superseded.
-- Pre-existing shared memory/skills drafts were not authored or published by this session.
+- Real HubSpot OAuth/sync and the NEW Dealroom corporate-investor adapter are not implemented; only mock data works. Google sign-in exists but lacks configured credentials and live verification. No real provider acceptance check is complete.
+- Red-team review is unfinished and paused by user. Early static observations remain open: mixed-sector fit wording, pending-match modal refresh, rejected-company recovery, self-addressed introduction drafts, clipboard error placement, invite-cookie consumption, GET mock-connect mutation, and disconnect/sync races. Do not claim production readiness.
+- Public mock accounts share persistent fictional state. Visitors can change settings; no real CRM data should be loaded into this deployment.
+- Email invitations are signed links plus a mailto draft, not automatic delivery. D1 native batches support atomic multi-step writes; Prisma interactive transactions are used only outside D1.
+- Local .env.local retains a private Dealroom credential-file path but MOCK_MODE=true. No secrets were committed. Cloudflare secrets JSON and .dev.vars are ignored.
+- Pre-existing shared memory/skills drafts were neither authored nor published by this session.
 
 ## Exact Next Steps
 
-1. Iterate the frontend at http://127.0.0.1:3000; use Load demo company for the complete four-slot flow.
-2. Configure ANTHROPIC_API_KEY in .env.local and verify real tool-use explanations and swaps.
-3. Improve live candidate coverage using verified type/portfolio filters, then verify a complete real four-slot round.
+1. Iterate the hosted demo based on user feedback. Choose a fictional partner; Maya has completed onboarding during verification.
+2. Implement and verify real Dealroom corporate-investor enrichment and HubSpot OAuth/sync when requested; keep public demo fictional.
+3. Resume the paused review only when requested, resolving recorded findings before real-firm use.

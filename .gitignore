@@ -15,3 +15,10 @@ AI_STATE.md.lock
 
 # Superseded local HTML sketch; active app is in app/ and components/.
 frontend/
+prisma/runtime.prisma
+prisma/*.db
+prisma/*.db-*
+
+.open-next/
+.wrangler/
+.dev.vars*

@@ -7,24 +7,35 @@
     "build": "next build",
     "start": "next start -H 127.0.0.1 -p 3000",
     "typecheck": "tsc --noEmit",
-    "test": "node --import tsx --test tests/*.test.ts",
-    "check:mock": "node --import tsx scripts/check-mock.ts"
+    "test": "node scripts/test.mjs",
+    "check:mock": "node --import tsx scripts/check-mock.ts",
+    "db:setup": "node scripts/database.mjs db push",
+    "db:generate": "node scripts/database.mjs generate",
+    "seed": "node --env-file=.env.local --import tsx scripts/seed.ts",
+    "cf:build": "npm run db:generate && opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare deploy"
   },
   "dependencies": {
-    "next": "^14.2.35",
+    "@fontsource/instrument-sans": "^5.3.0",
+    "@opennextjs/cloudflare": "^1.20.7",
+    "@prisma/adapter-d1": "^6.19.0",
+    "@prisma/client": "^6.19.0",
+    "next": "^15.5.27",
+    "next-auth": "^4.24.15",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-force-graph-2d": "^1.27.1",
-    "@anthropic-ai/sdk": "^0.68.0"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "typescript": "^5.7.3",
     "@types/node": "^22.10.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
-    "tailwindcss": "^3.4.17",
-    "postcss": "^8.4.49",
     "autoprefixer": "^10.4.20",
-    "tsx": "^4.19.2"
+    "postcss": "^8.4.49",
+    "prisma": "^6.19.0",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "wrangler": "^4.146.0"
   }
 }
