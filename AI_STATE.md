@@ -4,10 +4,12 @@
 
 - Mi-Chi is now a strategic-investor relationship demo for early-stage deeptech VC portfolios. The previous round-builder is superseded (checkpoint ef422f3).
 - Live: https://mi-chi-demo.katieluikakiu.workers.dev . Cloudflare Worker mi-chi-demo, D1 database 3390c21c-553e-4d00-9513-17911c912bdb, personal Cloudflare account 325cee91a2a8d96b12227b5370f01464.
-- Branch codex/strategic-crm; public repo katieluii/dealroom-api-hackathon. Remote main remains 8ff8985 (fetched 2026-10-01).
+- Main integration: PR #1 from codex/strategic-crm in katieluii/dealroom-api-hackathon. Feature branch retained. PR: https://github.com/katieluii/dealroom-api-hackathon/pull/1 .
 - User approved D1 and patched Next.js 15 (15.5.27). Workers Paid is active. User resumed the focused red-team/frontend-design readability pass; completed and deployed.
 
 ## Completed
+
+- Main integration preflight: clean source branch, no upstream divergence, eight tests and TypeScript passed, conflict-free merge-tree check. No configured GitHub checks or main protection. Incoming history checked against known local secret values: zero matches. Normal merge commit planned through PR #1; no force push or history rewrite.
 
 - Focused readability review: two fresh lenses, one pass, six medium/two low findings fixed. See docs/READABILITY_REVIEW.md. Team names lead, activity scores use /100, matching controls compare both organisations, evidence/source wording is accurate, own-contact drafts address contacts and clipboard errors stay in the dialog.
 - Eight tests passed, TypeScript and Cloudflare build passed. Browser checked desktop layout, own and teammate draft recipients, copying, pending-match modal survival across refresh, identity comparison and live fictional-source labels.

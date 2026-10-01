@@ -129,4 +129,3 @@ CREATE UNIQUE INDEX "EntityMatch_firmId_contactId_dealroomInvestorId_key" ON "En
 
 -- CreateIndex
 CREATE UNIQUE INDEX "DealroomCache_firmId_kind_key_key" ON "DealroomCache"("firmId", "kind", "key");
-
