@@ -81,3 +81,9 @@ Decisions: sectors are JSON string arrays for SQLite/Postgres parity. Firm's fir
 - Deploy fictional data only on Workers with the D1 Prisma adapter. Keep secrets server-side in Worker secrets.
 - Verify hosted sign-in, mock onboarding/sync, portfolio selection, scoring modal and draft copying.
 - User paused red-team work; complete deployment first. Live provider integrations and the unfinished review remain open.
+
+## 2026-10-01 — Team relationship holders
+
+- Each route leads with the internal partner under “Relationship held by”, then the external contact and investor. Activity evidence belongs to that named partner.
+- Replace ambiguous “How you know them” copy. The portfolio explains team opportunities rather than emphasizing a score.
+- The hosted fictional scenario opts Alex, Sam and Jo into sharing via an explicitly mock-ID-scoped migration. Real-user sharing defaults and data-layer visibility rules are unchanged.

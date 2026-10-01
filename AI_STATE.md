@@ -9,12 +9,14 @@
 
 ## Completed
 
+- Relationship cards now lead with the internal team member under “Relationship held by”, followed by the external contact and investor. Removed “How you know them”. Hosted Maya view verified with Alex and Jo routes for Luma; sharing remains enforced by the data layer. TypeScript and Cloudflare build passed for this update.
+
 - Strict TypeScript Next.js App Router, Prisma schema with tenant IDs, local SQLite and Cloudflare D1 adapters.
-- Fictional fixtures: 6 portfolio companies, 15 corporate investors, 60 contacts, 400 interactions, 4 partners. Default sharing off; expected groups 2 could use help / 4 well connected.
+- Fictional fixtures: 6 portfolio companies, 15 corporate investors, 60 contacts, 400 interactions, 4 partners. Real-user sharing defaults off; hosted fictional Alex/Sam/Jo configured as opted in via 0003_shared_demo_team.sql; expected groups 2 could use help / 4 well connected.
 - Scoring, Dealroom-fixture fit evidence, route matching, tenant/partner visibility through lib/scope.ts. Five tests pass including firm separation, hidden contacts, sharing changes, match eligibility and deletion.
 - Mock sign-in, three-step onboarding, sync, portfolio, company selection, scoring dialog, draft modal, matching controls and privacy UI. Latest cool-grey/Instrument Sans design supersedes Renascor.
 - Local browser verified sign-in, connect/sync, portfolio groups and scoring dialog. Hosted browser verified sign-in, mock connect, sync (15 contacts / 100 events for Maya), portfolio groups and draft dialog.
-- TypeScript and production OpenNext build passed. D1 migrations applied locally and remotely. Deployed version f2cd0e5e-2f1a-44bf-8c10-623f3608c8c4.
+- TypeScript and production OpenNext build passed. D1 migrations applied locally and remotely. Deployed version 2c7e9f24-3c48-4c70-a0dc-5338d79415a2.
 - Worker secrets contain fresh demo-only session/encryption keys; no real provider credentials uploaded. NEXTAUTH_URL set to the live origin. Preview URLs disabled.
 - README has setup, deployment and demo walkthrough. .env.example has required provider slots. Git ignores generated builds, database files and secret files.
 

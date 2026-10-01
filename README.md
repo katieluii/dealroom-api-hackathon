@@ -8,7 +8,7 @@ Find the people your team knows at potential strategic investors for your portfo
 
 The hosted demo uses Cloudflare Workers and D1. All companies, investors, contacts and activity are fictional. Choose one of four partners, connect the simulated HubSpot account, sync, then open the portfolio.
 
-The dataset has 6 portfolio companies, 15 corporate investors, 60 contacts and 400 interactions. Each partner starts with sharing off. Demo accounts share persistent state, so another visitor can change their settings.
+The dataset has 6 portfolio companies, 15 corporate investors, 60 contacts and 400 interactions. New users default to sharing off. In the hosted fictional scenario, Alex, Sam and Jo have sharing enabled so the team view is visible. Demo accounts share persistent state, so another visitor can change their settings.
 
 ### 60-second walkthrough
 
