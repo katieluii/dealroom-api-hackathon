@@ -1,0 +1,1069 @@
+[
+  {
+    "id": "r0",
+    "companyId": "c0",
+    "companyName": "Mirrorwave (mock)",
+    "stage": "Seed",
+    "date": "2023-01-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i4",
+      "i6",
+      "i20"
+    ],
+    "leadInvestorIds": [],
+    "leadIsInferred": true
+  },
+  {
+    "id": "r1",
+    "companyId": "c0",
+    "companyName": "Mirrorwave (mock)",
+    "stage": "Series A",
+    "date": "2025-02-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i4",
+      "i6",
+      "i20"
+    ],
+    "leadInvestorIds": [
+      "i4"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r2",
+    "companyId": "c1",
+    "companyName": "Beamworks (mock)",
+    "stage": "Seed",
+    "date": "2023-03-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i2",
+      "i3",
+      "i7",
+      "i21"
+    ],
+    "leadInvestorIds": [
+      "i2"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r3",
+    "companyId": "c1",
+    "companyName": "Beamworks (mock)",
+    "stage": "Series A",
+    "date": "2025-04-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i8",
+      "i12",
+      "i23"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r4",
+    "companyId": "c2",
+    "companyName": "Opticraft (mock)",
+    "stage": "Seed",
+    "date": "2023-05-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i4",
+      "i6",
+      "i20"
+    ],
+    "leadInvestorIds": [
+      "i4"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r5",
+    "companyId": "c2",
+    "companyName": "Opticraft (mock)",
+    "stage": "Series A",
+    "date": "2025-06-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i4",
+      "i6",
+      "i20"
+    ],
+    "leadInvestorIds": [
+      "i4"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r6",
+    "companyId": "c3",
+    "companyName": "Lab 4 (mock)",
+    "stage": "Seed",
+    "date": "2023-07-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i8",
+      "i22"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r7",
+    "companyId": "c3",
+    "companyName": "Lab 4 (mock)",
+    "stage": "Series A",
+    "date": "2025-08-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i2",
+      "i3",
+      "i7",
+      "i21"
+    ],
+    "leadInvestorIds": [
+      "i2"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r8",
+    "companyId": "c4",
+    "companyName": "Lab 5 (mock)",
+    "stage": "Seed",
+    "date": "2023-09-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i8",
+      "i12",
+      "i23"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r9",
+    "companyId": "c4",
+    "companyName": "Lab 5 (mock)",
+    "stage": "Series A",
+    "date": "2025-01-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i1",
+      "i3",
+      "i9",
+      "i24"
+    ],
+    "leadInvestorIds": [
+      "i1"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r10",
+    "companyId": "c5",
+    "companyName": "Lab 6 (mock)",
+    "stage": "Seed",
+    "date": "2023-02-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i2",
+      "i8",
+      "i20"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r11",
+    "companyId": "c5",
+    "companyName": "Lab 6 (mock)",
+    "stage": "Series A",
+    "date": "2025-03-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i8",
+      "i22"
+    ],
+    "leadInvestorIds": [],
+    "leadIsInferred": true
+  },
+  {
+    "id": "r12",
+    "companyId": "c6",
+    "companyName": "Lab 7 (mock)",
+    "stage": "Seed",
+    "date": "2023-04-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i2",
+      "i3",
+      "i7",
+      "i21"
+    ],
+    "leadInvestorIds": [
+      "i2"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r13",
+    "companyId": "c6",
+    "companyName": "Lab 7 (mock)",
+    "stage": "Series A",
+    "date": "2025-05-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i8",
+      "i12",
+      "i23"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r14",
+    "companyId": "c7",
+    "companyName": "Lab 8 (mock)",
+    "stage": "Seed",
+    "date": "2023-06-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i1",
+      "i3",
+      "i9",
+      "i24"
+    ],
+    "leadInvestorIds": [
+      "i1"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r15",
+    "companyId": "c7",
+    "companyName": "Lab 8 (mock)",
+    "stage": "Series A",
+    "date": "2025-07-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i2",
+      "i8",
+      "i20"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r16",
+    "companyId": "c8",
+    "companyName": "Lab 9 (mock)",
+    "stage": "Seed",
+    "date": "2023-08-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i8",
+      "i22"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r17",
+    "companyId": "c8",
+    "companyName": "Lab 9 (mock)",
+    "stage": "Series A",
+    "date": "2025-09-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i2",
+      "i3",
+      "i7",
+      "i21"
+    ],
+    "leadInvestorIds": [
+      "i2"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r18",
+    "companyId": "c9",
+    "companyName": "Lab 10 (mock)",
+    "stage": "Seed",
+    "date": "2023-01-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i8",
+      "i12",
+      "i23"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r19",
+    "companyId": "c9",
+    "companyName": "Lab 10 (mock)",
+    "stage": "Series A",
+    "date": "2025-02-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i1",
+      "i3",
+      "i9",
+      "i24"
+    ],
+    "leadInvestorIds": [
+      "i1"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r20",
+    "companyId": "c10",
+    "companyName": "Lab 11 (mock)",
+    "stage": "Seed",
+    "date": "2023-03-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i2",
+      "i8",
+      "i20"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r21",
+    "companyId": "c10",
+    "companyName": "Lab 11 (mock)",
+    "stage": "Series A",
+    "date": "2025-04-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i1",
+      "i4",
+      "i21"
+    ],
+    "leadInvestorIds": [
+      "i1"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r22",
+    "companyId": "c11",
+    "companyName": "Lab 12 (mock)",
+    "stage": "Seed",
+    "date": "2023-05-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i2",
+      "i3",
+      "i7",
+      "i21"
+    ],
+    "leadInvestorIds": [],
+    "leadIsInferred": true
+  },
+  {
+    "id": "r23",
+    "companyId": "c11",
+    "companyName": "Lab 12 (mock)",
+    "stage": "Series A",
+    "date": "2025-06-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i8",
+      "i12",
+      "i23"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r24",
+    "companyId": "c12",
+    "companyName": "Lab 13 (mock)",
+    "stage": "Seed",
+    "date": "2023-07-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i1",
+      "i3",
+      "i9",
+      "i24"
+    ],
+    "leadInvestorIds": [
+      "i1"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r25",
+    "companyId": "c12",
+    "companyName": "Lab 13 (mock)",
+    "stage": "Series A",
+    "date": "2025-08-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i2",
+      "i8",
+      "i20"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r26",
+    "companyId": "c13",
+    "companyName": "Lab 14 (mock)",
+    "stage": "Seed",
+    "date": "2023-09-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i8",
+      "i22"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r27",
+    "companyId": "c13",
+    "companyName": "Lab 14 (mock)",
+    "stage": "Series A",
+    "date": "2025-01-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i2",
+      "i3",
+      "i7",
+      "i21"
+    ],
+    "leadInvestorIds": [
+      "i2"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r28",
+    "companyId": "c14",
+    "companyName": "Lab 15 (mock)",
+    "stage": "Seed",
+    "date": "2023-02-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i8",
+      "i11",
+      "i23"
+    ],
+    "leadInvestorIds": [
+      "i8"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r29",
+    "companyId": "c14",
+    "companyName": "Lab 15 (mock)",
+    "stage": "Series A",
+    "date": "2025-03-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i1",
+      "i3",
+      "i9",
+      "i24"
+    ],
+    "leadInvestorIds": [
+      "i1"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r30",
+    "companyId": "c15",
+    "companyName": "Lab 16 (mock)",
+    "stage": "Seed",
+    "date": "2023-04-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i2",
+      "i8",
+      "i20"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r31",
+    "companyId": "c15",
+    "companyName": "Lab 16 (mock)",
+    "stage": "Series A",
+    "date": "2025-05-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i8",
+      "i22"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r32",
+    "companyId": "c16",
+    "companyName": "Lab 17 (mock)",
+    "stage": "Seed",
+    "date": "2023-06-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i2",
+      "i3",
+      "i7",
+      "i21"
+    ],
+    "leadInvestorIds": [
+      "i2"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r33",
+    "companyId": "c16",
+    "companyName": "Lab 17 (mock)",
+    "stage": "Series A",
+    "date": "2025-07-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i8",
+      "i12",
+      "i23"
+    ],
+    "leadInvestorIds": [],
+    "leadIsInferred": true
+  },
+  {
+    "id": "r34",
+    "companyId": "c17",
+    "companyName": "Lab 18 (mock)",
+    "stage": "Seed",
+    "date": "2023-08-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i1",
+      "i3",
+      "i9",
+      "i24"
+    ],
+    "leadInvestorIds": [
+      "i1"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r35",
+    "companyId": "c17",
+    "companyName": "Lab 18 (mock)",
+    "stage": "Series A",
+    "date": "2025-09-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i15",
+      "i18",
+      "i20"
+    ],
+    "leadInvestorIds": [
+      "i15"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r36",
+    "companyId": "c18",
+    "companyName": "Lab 19 (mock)",
+    "stage": "Seed",
+    "date": "2023-01-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i8",
+      "i22"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r37",
+    "companyId": "c18",
+    "companyName": "Lab 19 (mock)",
+    "stage": "Series A",
+    "date": "2025-02-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i2",
+      "i3",
+      "i7",
+      "i21"
+    ],
+    "leadInvestorIds": [
+      "i2"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r38",
+    "companyId": "c19",
+    "companyName": "Lab 20 (mock)",
+    "stage": "Seed",
+    "date": "2023-03-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i8",
+      "i12",
+      "i23"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r39",
+    "companyId": "c19",
+    "companyName": "Lab 20 (mock)",
+    "stage": "Series A",
+    "date": "2025-04-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i1",
+      "i3",
+      "i9",
+      "i24"
+    ],
+    "leadInvestorIds": [
+      "i1"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r40",
+    "companyId": "c20",
+    "companyName": "Lab 21 (mock)",
+    "stage": "Seed",
+    "date": "2023-05-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i2",
+      "i8",
+      "i20"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r41",
+    "companyId": "c20",
+    "companyName": "Lab 21 (mock)",
+    "stage": "Series A",
+    "date": "2025-06-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i8",
+      "i22"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r42",
+    "companyId": "c21",
+    "companyName": "Lab 22 (mock)",
+    "stage": "Seed",
+    "date": "2023-07-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i2",
+      "i5",
+      "i22"
+    ],
+    "leadInvestorIds": [
+      "i2"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r43",
+    "companyId": "c21",
+    "companyName": "Lab 22 (mock)",
+    "stage": "Series A",
+    "date": "2025-08-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i8",
+      "i12",
+      "i23"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r44",
+    "companyId": "c22",
+    "companyName": "Lab 23 (mock)",
+    "stage": "Seed",
+    "date": "2023-09-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i1",
+      "i3",
+      "i9",
+      "i24"
+    ],
+    "leadInvestorIds": [],
+    "leadIsInferred": true
+  },
+  {
+    "id": "r45",
+    "companyId": "c22",
+    "companyName": "Lab 23 (mock)",
+    "stage": "Series A",
+    "date": "2025-01-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i2",
+      "i8",
+      "i20"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r46",
+    "companyId": "c23",
+    "companyName": "Lab 24 (mock)",
+    "stage": "Seed",
+    "date": "2023-02-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i8",
+      "i22"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r47",
+    "companyId": "c23",
+    "companyName": "Lab 24 (mock)",
+    "stage": "Series A",
+    "date": "2025-03-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i2",
+      "i3",
+      "i7",
+      "i21"
+    ],
+    "leadInvestorIds": [
+      "i2"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r48",
+    "companyId": "c24",
+    "companyName": "Lab 25 (mock)",
+    "stage": "Seed",
+    "date": "2023-04-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i8",
+      "i12",
+      "i23"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r49",
+    "companyId": "c24",
+    "companyName": "Lab 25 (mock)",
+    "stage": "Series A",
+    "date": "2025-05-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i9",
+      "i12",
+      "i24"
+    ],
+    "leadInvestorIds": [
+      "i9"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r50",
+    "companyId": "c25",
+    "companyName": "Lab 26 (mock)",
+    "stage": "Seed",
+    "date": "2023-06-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i2",
+      "i8",
+      "i20"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r51",
+    "companyId": "c25",
+    "companyName": "Lab 26 (mock)",
+    "stage": "Series A",
+    "date": "2025-07-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i8",
+      "i22"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r52",
+    "companyId": "c26",
+    "companyName": "Lab 27 (mock)",
+    "stage": "Seed",
+    "date": "2023-08-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i2",
+      "i3",
+      "i7",
+      "i21"
+    ],
+    "leadInvestorIds": [
+      "i2"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r53",
+    "companyId": "c26",
+    "companyName": "Lab 27 (mock)",
+    "stage": "Series A",
+    "date": "2025-09-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i8",
+      "i12",
+      "i23"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r54",
+    "companyId": "c27",
+    "companyName": "Lab 28 (mock)",
+    "stage": "Seed",
+    "date": "2023-01-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i1",
+      "i3",
+      "i9",
+      "i24"
+    ],
+    "leadInvestorIds": [
+      "i1"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r55",
+    "companyId": "c27",
+    "companyName": "Lab 28 (mock)",
+    "stage": "Series A",
+    "date": "2025-02-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i0",
+      "i1",
+      "i2",
+      "i8",
+      "i20"
+    ],
+    "leadInvestorIds": [],
+    "leadIsInferred": true
+  },
+  {
+    "id": "r56",
+    "companyId": "c28",
+    "companyName": "Lab 29 (mock)",
+    "stage": "Seed",
+    "date": "2023-03-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i16",
+      "i19",
+      "i21"
+    ],
+    "leadInvestorIds": [
+      "i16"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r57",
+    "companyId": "c28",
+    "companyName": "Lab 29 (mock)",
+    "stage": "Series A",
+    "date": "2025-04-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i2",
+      "i3",
+      "i7",
+      "i21"
+    ],
+    "leadInvestorIds": [
+      "i2"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r58",
+    "companyId": "c29",
+    "companyName": "Lab 30 (mock)",
+    "stage": "Seed",
+    "date": "2023-05-15",
+    "amount": 3000000,
+    "investorIds": [
+      "i0",
+      "i8",
+      "i12",
+      "i23"
+    ],
+    "leadInvestorIds": [
+      "i0"
+    ],
+    "leadIsInferred": false
+  },
+  {
+    "id": "r59",
+    "companyId": "c29",
+    "companyName": "Lab 30 (mock)",
+    "stage": "Series A",
+    "date": "2025-06-15",
+    "amount": 9000000,
+    "investorIds": [
+      "i1",
+      "i3",
+      "i9",
+      "i24"
+    ],
+    "leadInvestorIds": [
+      "i1"
+    ],
+    "leadIsInferred": false
+  }
+]

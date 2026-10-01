@@ -1,10 +1,17 @@
 .env
+.env.*
 *.env
 !.env.example
 .venv/
 __pycache__/
 *.pyc
 .DS_Store
-data/
+node_modules/
+.next/
+*.tsbuildinfo
+data/cache/
 outputs/
 AI_STATE.md.lock
+
+# Superseded local HTML sketch; active app is in app/ and components/.
+frontend/

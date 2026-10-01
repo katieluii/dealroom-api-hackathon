@@ -1,32 +1,47 @@
-# Dealroom API Hackathon
+# mi-chi
 
-A working home for a Dealroom London Hackathon project. The product concept and demo are still to be defined.
+Build a funding round for a portfolio company: one lead, two followers, one strategic investor. Compare sector fit, shared investments and portfolio conflicts on a graph.
 
-## Quickstart
+## Run
 
-Requires Python 3.9 or later. Use the personal credentials file supplied by Dealroom; keep it outside this public repository.
+Requires Node.js 20+.
 
 ```bash
-python3 app/quickstart.py /absolute/path/to/dealroom-katie-lui.env
+npm install
+cp .env.example .env.local
+npm run dev
 ```
 
-The script requests an access token and prints the ten companies from the [Dealroom quickstart](https://developers.beta.dealroom.co/getting-started/quickstart) as a table. It does not save the token or response. Every data request sends both `Authorization: Bearer` and `X-Client-Id`.
+Open http://127.0.0.1:3000. `MOCK_MODE=true` works without credentials using fictional companies, 25 investors and 60 rounds.
 
-## Project map
+For Dealroom, set `MOCK_MODE=false`, `DEALROOM_BASE_URL` and `DEALROOM_ENV_FILE` to the absolute path of the supplied OAuth credentials file. Alternatively provide `DEALROOM_API_KEY` and `DEALROOM_CLIENT_ID`. All API calls and response mapping live in `lib/dealroom.ts`. Responses are cached for 15 minutes in memory and `data/cache/`, which is excluded from Git. API failures show a notice and the fictional demo company.
 
-| Path | Purpose |
-| --- | --- |
-| `app/` | Prototype and API code |
-| `docs/` | Product context, decisions, architecture, demo notes |
-| `research/` | Public sources and analysis notes |
-| `deck/` | Pitch material |
-| `SPECS.md` | Testable feature decisions |
-| `AI_STATE.md` | Current project handoff |
+Set `ANTHROPIC_API_KEY` for Claude tool use. `ANTHROPIC_MODEL` defaults to `claude-sonnet-4-6`. Without the key, the three suggested prompts use labelled scripted commands. Open-ended Claude chat remains unverified until a key is supplied.
 
-## Data rules
+## Demo
 
-Dealroom's API is for this hackathon project under the terms supplied with the key. Keep credentials and bulk data out of Git. For any published count, chart, or ranking, record the population, filters, geographic attribution, tag family, date, and pagination. VC funding and valuation views have different default exclusions; use the Dealroom analyst note supplied with the key before publishing a number.
+1. Click **Load demo company**.
+2. Click **Why this lead?** for named co-investments and inferred lead counts.
+3. Open an **Overlap to check** badge to inspect the portfolio company.
+4. Click **Find a non-US lead**, then inspect the updated graph.
+5. Use **Replace with** to swap an investor.
+6. Click **Export round plan** to download Markdown.
 
-## Next step
+## Checks and limits
 
-Choose a specific user problem and demo flow, then record the implementation contract in `SPECS.md`.
+```bash
+npm run check:mock
+npm test
+npm run typecheck
+npm run build
+```
+
+Next.js 14, React, strict TypeScript, Tailwind, react-force-graph-2d and Anthropic SDK. No database or authentication; run locally. Sessions expire after an hour and reset when the server restarts.
+
+Live mapping was checked against Dealroom records for Celestial AI. The current query samples 25 investors and loads up to two portfolio companies per shortlisted investor. It may leave slots empty, including the strategic slot. It is not an exhaustive investor search or conflict clearance. Industry and sub-industry tags drive live category fit; generic sector tags are excluded. Company stage is its latest disclosed VC round. Round dates are normalised to the first day of the recorded month. Cold requests may take longer than ten seconds; cached company loads are fast.
+
+Co-investment does not confirm a warm introduction. Lead attribution may be inferred from cheque size or listing order and is labelled. Scores support screening, not investment decisions.
+
+Visual style follows the requested Renascor palette and typography: white, ink, gold, Georgia headings and Helvetica body. The product identity remains mi-chi. Review results are in `docs/REVIEW.md`.
+
+Stretch ideas: verified introduction paths from founder and VC networks, wider paginated investor coverage, target round stage selection.

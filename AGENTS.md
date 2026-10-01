@@ -13,10 +13,10 @@ Goal: build a working, honest hackathon demo using the Dealroom API.
 
 ## How to run
 
-`python3 app/quickstart.py /absolute/path/to/dealroom-katie-lui.env`
+`npm install`, `cp .env.example .env.local`, `npm run dev`. Verify with `npm test`, `npm run typecheck`, `npm run build`. Keep mock fixtures labelled. Renascor palette and type apply to mi-chi; avoid generic marketing copy.
 
 ## Handoff
 
 Read `AI_STATE.md` before work, then `SPECS.md` for defined features.
 
-@.codex/memory/MEMORY.md
+@.Codex/memory/MEMORY.md
