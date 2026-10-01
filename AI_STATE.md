@@ -9,6 +9,8 @@
 
 ## Completed
 
+- Added public /appendix and Appendix navigation tab: exact scoring formula, weights, label bands, team aggregation, limitations and four examples computed by scoreRelationship. Production build passed; deployed page visually checked, examples verified as 100 Strong / 53 Warm / 39 Cool / 12 Cold.
+
 - Relationship cards now lead with the internal team member under “Relationship held by”, followed by the external contact and investor. Removed “How you know them”. Hosted Maya view verified with Alex and Jo routes for Luma; sharing remains enforced by the data layer. TypeScript and Cloudflare build passed for this update.
 
 - Strict TypeScript Next.js App Router, Prisma schema with tenant IDs, local SQLite and Cloudflare D1 adapters.
@@ -16,11 +18,13 @@
 - Scoring, Dealroom-fixture fit evidence, route matching, tenant/partner visibility through lib/scope.ts. Five tests pass including firm separation, hidden contacts, sharing changes, match eligibility and deletion.
 - Mock sign-in, three-step onboarding, sync, portfolio, company selection, scoring dialog, draft modal, matching controls and privacy UI. Latest cool-grey/Instrument Sans design supersedes Renascor.
 - Local browser verified sign-in, connect/sync, portfolio groups and scoring dialog. Hosted browser verified sign-in, mock connect, sync (15 contacts / 100 events for Maya), portfolio groups and draft dialog.
-- TypeScript and production OpenNext build passed. D1 migrations applied locally and remotely. Deployed version 2c7e9f24-3c48-4c70-a0dc-5338d79415a2.
+- TypeScript and production OpenNext build passed. D1 migrations applied locally and remotely. Deployed version 9f22bb9e-27b1-4847-b5ef-5147943c8420.
 - Worker secrets contain fresh demo-only session/encryption keys; no real provider credentials uploaded. NEXTAUTH_URL set to the live origin. Preview URLs disabled.
 - README has setup, deployment and demo walkthrough. .env.example has required provider slots. Git ignores generated builds, database files and secret files.
 
 ## Known Issues
+
+- User purchased Workers Paid directly. Dashboard confirmed Paid is current; portfolio and scoring dialog passed live verification after the upgrade. Previous Free-plan CPU errors no longer reproduced in that check.
 
 - Real HubSpot OAuth/sync and the NEW Dealroom corporate-investor adapter are not implemented; only mock data works. Google sign-in exists but lacks configured credentials and live verification. No real provider acceptance check is complete.
 - Red-team review is unfinished and paused by user. Early static observations remain open: mixed-sector fit wording, pending-match modal refresh, rejected-company recovery, self-addressed introduction drafts, clipboard error placement, invite-cookie consumption, GET mock-connect mutation, and disconnect/sync races. Do not claim production readiness.
@@ -31,6 +35,7 @@
 
 ## Exact Next Steps
 
-1. Iterate the hosted demo based on user feedback. Choose a fictional partner; Maya has completed onboarding during verification.
-2. Implement and verify real Dealroom corporate-investor enrichment and HubSpot OAuth/sync when requested; keep public demo fictional.
-3. Resume the paused review only when requested, resolving recorded findings before real-firm use.
+1. Iterate the live demo as directed. Workers Paid is active and the scoring appendix is deployed.
+2. User asked for a focused readability/copy review, then paused it to verify deployment first. Two fresh static reviewers returned medium/low observations; no fixes applied. Resume only after deployment is stable and as directed.
+3. Implement and verify real Dealroom corporate-investor enrichment and HubSpot OAuth/sync when requested; keep public demo fictional.
+4. Resume the paused review only when requested, resolving recorded findings before real-firm use.

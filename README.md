@@ -14,7 +14,7 @@ The dataset has 6 portfolio companies, 15 corporate investors, 60 contacts and 4
 
 1. Continue as Maya Chen; connect demo HubSpot, start sync, open portfolio.
 2. Select Luma Photonics. Read the investor fit and interaction evidence.
-3. Open “How is this scored?” to see the four components.
+3. Open “How is this scored?” to see the four components. The Appendix tab gives the full formula, thresholds, worked examples and limitations.
 4. Open “Draft intro request”, copy the draft, close it. Nothing is sent.
 5. Compare Helio Fusion under “Could use help”.
 6. Open Privacy to change sharing or hide a contact. Sign out and choose another partner to see the changed visibility.

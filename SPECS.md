@@ -87,3 +87,9 @@ Decisions: sectors are JSON string arrays for SQLite/Postgres parity. Firm's fir
 - Each route leads with the internal partner under “Relationship held by”, then the external contact and investor. Activity evidence belongs to that named partner.
 - Replace ambiguous “How you know them” copy. The portfolio explains team opportunities rather than emphasizing a score.
 - The hosted fictional scenario opts Alex, Sam and Jo into sharing via an explicitly mock-ID-scoped migration. Real-user sharing defaults and data-layer visibility rules are unchanged.
+
+## 2026-10-01 — Scoring appendix
+
+- Add an Appendix navigation tab explaining the implemented scoring formula, four components, thresholds, team aggregation, privacy visibility, and limits.
+- Worked examples use the actual pure scoring function; documentation must disclose note-based recency and the email denominator fallback.
+- General scoring methodology is public; the appendix exposes no CRM data. Deploy and verify the new page.
